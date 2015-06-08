@@ -37,7 +37,7 @@ voir http://www.gnu.org/licenses/
 	<meta property="og:url" content="{{ request.build_absolute_uri }}" />
 	<meta property="og:image" content="//{{ request.META.HTTP_HOST }}{% static 'images/share.jpg' %}" />
 	<meta property="og:description" content="{{ channel.description|striptags|addslashes|linebreaksbr|truncatechars:250  }}" /> 
-	<meta property="og:site_name" content="{{ TITLE_SITE }}" />
+	<meta property="og:site_name" content="{{ TITLE_SITE }}" /> 
 {% endblock %}
 
 {% block article_title %}{{ channel.title }}{% endblock %}
