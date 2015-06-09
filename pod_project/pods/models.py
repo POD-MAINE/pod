@@ -373,6 +373,9 @@ class Pod(Video):
 
     def is_richmedia(self):
         return self.enrichpods_set.exclude(type=None)
+    def get_iframe_integration(self):
+        tmpStr = '<iframe src="{0:s}?is_iframe=true&size=80" width="213" height="120" style="padding: 0; margin: 0; border:0" allowfullscreen ></iframe>'
+        return tmpStr.format(settings.SITE_URL_VIDEO + self.slug +"/")
 
 
 @receiver(post_save, sender=Pod)

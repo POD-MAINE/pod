@@ -41,6 +41,7 @@ from datetime import datetime
 from django.utils import formats
 from django.utils.http import urlquote
 from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
 
 import simplejson as json
 from haystack.query import SearchQuerySet
