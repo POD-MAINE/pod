@@ -523,32 +523,23 @@ def video_add_favorite(request, slug):
 @login_required
 @csrf_protect
 def video_add_alert(request, slug):
-    user=request.user
+    user = request.user
     video = get_object_or_404(Pod, slug=slug)
-    subject = 'Alerte vidéo'
-    message = 'Cette vidéo a été signalée par '
-    message += user.username
-    message += '( '+user.first_name + ' ' + user.last_name + ' ) : '
-    message += "\n Commentaire : "
-    message += request.POST.get('video_alert_ta')
-    message += "\n\n Description de la video : "
-    message += "\n Titre : "
-    message += video.title
-    message += "\n Lien : "
-    message += 'http://' + settings.SITE_URL + '/video/' + video.slug
-    message += "\n Cette vidéo a été postée par "
-    message += str(video.owner)
-    message += '( '+video.owner.first_name + ' ' + video.owner.last_name + ' ) : '
-    message += 'le ' + str(video.date_added)
+    subject = _("Warning subject")
+    message = _("Warning body") % {'user_name': user.username, 'user_first_name': user.first_name,
+            'user_last_name':user.last_name,'comment':request.POST.get('video_alert_ta'),
+            'video_title':video.title,'site_URL':settings.SITE_URL,'video_slug':video.slug,
+            'video_owner':str(video.owner),'video_owner_first_name':video.owner.first_name,
+            'video_owner_lastname':video.owner.last_name,'video_date_added':str(video.date_added)}
+
     send_mail(subject, message, settings.ALERT_VIDEO_MAIL_FROM,
     settings.ALERT_VIDEO_MAIL_TO, fail_silently=False) 
 
     
     if request.POST :
         msg = _(u'Alerte envoyée')
-        #alertStatus = get_object_or_404(AlertStatus, pk=1)
-        #alerte, create = Alert.objects.get_or_create(video=video, user=request.user, alertStatus, request.POST.get('video_alert_ta'))
-        alerte, create = Alert.objects.get_or_create(video=video, user=request.user, alertStatus_id=1,commentaire=request.POST.get('video_alert_ta'))
+        alerte, create = Alert.objects.get_or_create(video = video, user = request.user, 
+            alertStatus_id = 1,commentaire=request.POST.get('video_alert_ta'))
         if request.is_ajax():
             return HttpResponse(msg)
         messages.add_message(request, messages.INFO, msg)
