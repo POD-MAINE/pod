@@ -57,8 +57,8 @@ pod_project/pods/viewsv1.py
 *.bak
 .coverage
 
-+# Themes Files #
-+################
+# Themes Files #
+################
 *pod_project/core/static/ThemeUM/
 
 # IDE Files #
