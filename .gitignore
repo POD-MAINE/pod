@@ -59,7 +59,7 @@ pod_project/pods/viewsv1.py
 
 +# Themes Files #
 +################
-*pod/pod_project/core/static/ThemeUM/
+*pod_project/core/static/ThemeUM/
 
 # IDE Files #
 #############
