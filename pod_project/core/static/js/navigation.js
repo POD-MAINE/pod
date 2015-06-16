@@ -250,6 +250,7 @@ $(document).on('click', 'button#button_video_favorite', function (event) {
 
 
 $(document).on('click', 'button#button_video_alert', function (event) {
+    console.log("Passage dans VIDEO ALERT");
     event.preventDefault();
     if($( "#video_favorite_form" ).length==0){
         alert($(this).children('span.sr-only').text());

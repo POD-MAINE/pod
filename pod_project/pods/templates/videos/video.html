@@ -98,7 +98,7 @@ voir http://www.gnu.org/licenses/
 
             {% if not request.GET.is_iframe %}
                 <h3 itemprop="name" >
-                    {{ video.title }}
+                    {{ video.title }} | {{ show_alert|safe }}
                     <small>
                         {% if video.date_evt %}
                             {{ video.date_evt }}
@@ -122,8 +122,11 @@ voir http://www.gnu.org/licenses/
                                     <input type="submit" value="{% trans 'Send' %}" />
                                 </noscript>
                             </form>
+                            
+                            {% if show_alert %}
                             <button class="btn btn-link" data-toggle="modal" data-target="#myModal"   >
                                 <span id="mark-as-fav" class="glyphicon glyphicon-flag" data-toggle="tooltip" data-placement="right" title="{% trans 'add an alert' %}"></span>
+                                
                                 <span class="sr-only">{% trans 'add an alert' %}</span>
                             </button>
                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -151,16 +154,19 @@ voir http://www.gnu.org/licenses/
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div>
+                            {% endif %}
                             <br/>
                         {% else %}
                             <button class="btn btn-link" id="button_video_favorite">
                                 <span class="glyphicon glyphicon-star"></span>
                                 <span class="sr-only">{% trans 'You must be logged in to add this video to your favorites' %}</span>
                             </button>
-                            <button class="btn btn-link" id="button_video_alert">
-                                <span class="glyphicon glyphicon-flag"></span>
-                                <span class="sr-only">{% trans 'You must be logged in to alert this video' %}</span>
-                            </button>
+                             {% if show_alert %}       
+                                <button class="btn btn-link" id="button_video_alert">
+                                    <span class="glyphicon glyphicon-flag"></span>
+                                    <span class="sr-only">{% trans 'You must be logged in to alert this video' %}</span>
+                                </button>
+                            {% endif %}
                         {% endif %}
                     </small>
                 </h3><!-- end h3 title -->

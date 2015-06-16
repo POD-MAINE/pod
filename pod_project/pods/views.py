@@ -461,7 +461,9 @@ def video(request, slug, slug_c=None, slug_t=None):
                         'theme': theme, 'share_url': share_url},
                     context_instance=RequestContext(request)
                 )
-
+    
+    show_alert = getattr(settings, 'SHOW_ALERT', False);
+    
     if request.user.is_authenticated():
         note, created = Notes.objects.get_or_create(
             video=video, user=request.user)
@@ -472,7 +474,7 @@ def video(request, slug, slug_c=None, slug_t=None):
             return render_to_response(
                 'videos/video.html',
                 {'video': video, 'channel': channel, 'theme': theme,
-                    'notes_form': notes_form, 'share_url': share_url},
+                    'notes_form': notes_form, 'share_url': share_url, 'show_alert': show_alert},
                 context_instance=RequestContext(request)
             )
     if request.GET.get('action') and request.GET.get('action') == "download":
@@ -481,7 +483,7 @@ def video(request, slug, slug_c=None, slug_t=None):
         return render_to_response(
             'videos/video.html',
             {'video': video, 'channel': channel,
-                'theme': theme, 'share_url': share_url},
+                'theme': theme, 'share_url': share_url, 'show_alert': show_alert},
             context_instance=RequestContext(request)
         )
 
