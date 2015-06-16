@@ -60,6 +60,14 @@ pod_project/pods/viewsv1.py
 # Themes Files #
 ################
 *pod_project/core/static/ThemeUM/
+*.jpg
+*.json
+*.css
+*.ttf
+*.woff
+bootstrap.js
+*.png
+*.less
 
 # IDE Files #
 #############
